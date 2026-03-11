@@ -7,15 +7,25 @@ function Player() {
   const { camera } = useThree()
   const [, getKeys] = useKeyboardControls()
 
+  const direction = new THREE.Vector3()
+  const frontVector = new THREE.Vector3()
+  const sideVector = new THREE.Vector3()
+
   useFrame((state, delta) => {
     const { forward, backward, left, right, up, down } = getKeys()
-    const direction = new THREE.Vector3(+right - +left, 0, +backward - +forward)
+    const dir = new THREE.Vector3(+left - +right, 0, +forward - +backward)
+
+    camera.getWorldDirection(frontVector)
+    frontVector.y = 0
+    frontVector.normalize()
+    sideVector.crossVectors(camera.up, frontVector)
+
+    direction
+      .set(0, 0, 0)
+      .addScaledVector(frontVector, dir.z)
+      .addScaledVector(sideVector, dir.x)
       .normalize()
       .multiplyScalar(speed)
-      .applyQuaternion(camera.quaternion)
-
-    console.log(camera.quaternion)
-
 
     camera.position.x += direction.x
     camera.position.y += (+up - +down) * speed

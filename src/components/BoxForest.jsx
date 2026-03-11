@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef } from "react"
 import * as THREE from 'three'
+
 function BoxForest({ count = 10 }) {
   const meshRef = useRef()
   const tempObject = new THREE.Object3D()
