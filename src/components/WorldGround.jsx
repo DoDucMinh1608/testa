@@ -2,6 +2,7 @@ import { Grid, Sky } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from 'three';
+import SolidFloor from "./SolidFloor";
 
 function WorldGround({ renderDistance = 32 }) {
   const { camera } = useThree()
@@ -24,11 +25,10 @@ function WorldGround({ renderDistance = 32 }) {
       {/* 1. Atmospheric Sky */}
       <Sky />
 
-
       {/* 3. The Floor: Must fade out at the same distance */}
       <Grid
         infiniteGrid
-        // fadeDistance={renderDistance}
+        fadeDistance={renderDistance}
         fadeStrength={1}
         cellSize={0.2}
         sectionSize={1}
