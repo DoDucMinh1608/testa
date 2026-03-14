@@ -2,7 +2,7 @@ import { useKeyboardControls } from "@react-three/drei"
 import { useFrame, useThree } from "@react-three/fiber"
 import * as THREE from 'three'
 
-const speed = 0.1
+const speed = 0.05
 function Player() {
   const { camera } = useThree()
   const [, getKeys] = useKeyboardControls()
